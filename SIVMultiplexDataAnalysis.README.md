@@ -222,5 +222,26 @@ Copied from the Zequencer 2017 README:
 	
 	http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 	
-When analyzing the biological data requested by reviewers, we used an updated pipeline designed more specifically to work with biological samples, available at https://github.com/gagekmoreno/SARS_CoV-2_Zequencer, version 2, but with the NCBI reference M33262, 2000000 reads per sample, 0.01 minimum variant percentage, and minimum read length 100. 
+When analyzing the biological data requested by reviewers, we used an updated pipeline available on Docker by pulling the following Docker image: docker pull dockerreg.chtc.wisc.edu/dhoconno/zequencer:22476. Next, in the directory where the FASTQ sequences are located, the image was running using the following command: 
+docker run --user $(id -u):$(id -g) \ 
+-it -v $(pwd):/scratch -w /scratch \ 
+dockerreg.chtc.wisc.edu/dhoconno/zequencer:22476 \ 
+/bin/bash. 
+
+Next, snakemake script was used to invoke the mapper, without using a short read amplicon file. For example:
+
+snakemake \
+--snakefile /zequencer/zequencer.smk \
+--config \
+r1_fastq=SIVmac239-R1.fastq.gz \
+r2_fastq=SIVmac239-R2.fastq.gz \
+sample_name=SIVmac239 \
+ncbi_accession=M33262 \
+downsampling_fasta= \
+reads_per_amplicon= \
+reads_per_sample=2000000 \
+minimum_variant_percentage=0.01 \
+minimum_read_length=100
+
+ 
 	
