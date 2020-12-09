@@ -222,3 +222,5 @@ Copied from the Zequencer 2017 README:
 	
 	http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 	
+When analyzing the biological data requested by reviewers, we used an updated pipeline designed more specifically to work with biological samples, available at https://github.com/gagekmoreno/SARS_CoV-2_Zequencer, version 2, but with the NCBI reference M33262, 2000000 reads per sample, 0.01 minimum variant percentage, and minimum read length 100. 
+	
